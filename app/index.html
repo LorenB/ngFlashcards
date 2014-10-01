@@ -8,13 +8,18 @@
   <body>
     <div class="container" ng-controller="mainController">
       <h1>Flashcards are cool</h1>
-      <div>
+      <div ng-if="activeCardsExist">
         <p ng-if="!isAnswerView">{{currentCard.question}}</p>
         <p ng-if="isAnswerView">{{currentCard.answer}}</p>
         <button ng-if="!isAnswerView" type="button" class="btn btn-default" ng-click="showAnswer()">answer</button>
         <button ng-if="isAnswerView" type="button" class="btn btn-default" ng-click="showQuestion()">question</button>
-        <button type="button" class="btn btn-default" ng-click="getCard(currentCardNum - 1)">previous</button>
-        <button type="button" class="btn btn-default" ng-click="getCard(currentCardNum + 1)">next</button>
+        <button ng-if="isAnswerView" type="button" class="btn btn-default" ng-click="gradeCurrentCard(true)">mark correct</button>
+        <button ng-if="isAnswerView" type="button" class="btn btn-default" ng-click="gradeCurrentCard(false)">mark wrong</button>
+        <button type="button" class="btn btn-default" ng-click="setCurrentCard()">next card</button>
+        <!-- <button type="button" class="btn btn-default" ng-click="getCard(currentCardNum + 1)">next</button> -->
+      </div>
+      <div ng-if="!activeCardsExist">
+        <p>No more cards remain.</p>
       </div>
           
 
